@@ -3,6 +3,8 @@
 
 <head>
 	<title>Ефремова Юлия Александровна</title>
+
+<!--	достаточно простого <meta charset="UTF-8">-->
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="css/style.min.css" />
@@ -14,8 +16,10 @@
 		<main class="page">
 			<section class="profile">
 				<div class="profile__container container">
+<!--					что такое ibg?-->
 					<div class="profile__photo ibg">
 						<picture>
+<!--							желательно не компоновать теги на одной строке, сама идея с picture отличная-->
 							<source srcset="img/photo.webp" type="image/webp"><img src="img/photo.jpg" alt="Фото">
 						</picture>
 					</div>
@@ -47,8 +51,13 @@
 				<div class="information__container container">
 					<div class="information__education info-block">
 						<div class="info-block__item">
+<!--							судя по всему это h2 как и прочие h3-->
 							<h3 class="info-block__title">Образование:</h3>
+
+<!--							по хорошему это dl dt dd-->
 							<div class="info-block__info">
+<!--								__bold - плохое имя класса, так же плохо как например __red, если бы захотелось покрасить красным,-->
+<!--								 судя по всему это __term | __heading | __definition, а через css уже font-weight можно-->
 								<span class="info-block__bold">ВУЗ:</span> Томский государственный университет
 							</div>
 							<div class="info-block__info">
@@ -60,6 +69,7 @@
 							</div>
 						</div>
 						<div class="info-block__item">
+<!--							не является ошибкой, но стилистически двоеточие лишнее после заголовков-->
 							<h3 class="info-block__title">Иностранные языки:</h3>
 							<div class="info-block__info">
 								<span class="info-block__bold">Английский язык: </span>B2
@@ -77,6 +87,10 @@
 								течении 2 семестра 1 курса.
 							</div>
 							<div class="info-block__info">
+<!--
+здесь и в подобных местах двоеточие пишется слитно со словом, но это мелочи,
+потому что особо по html не вижу проблем
+придираюсь к незначительному-->
 								<span class="info-block__bold">Курсы :</span> Изучение языка программирования C++ на курсах
 								довузовской подготовки.
 							</div>
@@ -105,6 +119,25 @@
 						</div>
 						<div class="info-block__item">
 							<h3 class="info-block__title">Откуда узнала про курс?</h3>
+							<!--
+							проще к чтению и рефакторингу следующее форматирование
+
+							<div class="info-block__info">
+								Из группы
+								<a
+									href="https://vk.com/kingsoftsu"
+								    class="info-block__link"
+								    target="_blank"
+								>
+									ИПМКН
+								</a>
+								ВКонтакте
+							</div>
+
+							хотя здесь можно форматировать далее,
+							например не писать атрибуты на отдельных строках,
+							зависит от проекта, но общая идея в том что код выше проще читать и редактировать
+							-->
 							<div class="info-block__info">Из группы <a href="https://vk.com/kingsoftsu"
 									class="info-block__link" target="_blank">ИПМКН</a> ВКонтакте</div>
 						</div>

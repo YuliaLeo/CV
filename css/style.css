@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-
+/*импортам шрифтов с гугла место в html, это блокирует загрузку*/
+/*https://stackoverflow.com/questions/12316501/including-google-fonts-link-or-import*/
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
 
+/*идею понял, можно лучше через font-awesome или через icomoon, если дизайнер нарисовал свои иконки*/
 @font-face {
   font-family: "icons";
   font-display: swap;
@@ -39,12 +41,16 @@
   content: "\eab0";
 }
 
+/*это плохая идея, минимальное кол-во профита от всеобщего сброса по всем тегам,*/
+/*лучше использовать normalize.css и далее задавать сбросы уже отдельным элементам*/
 * {
   padding: 0px;
   margin: 0px;
   border: 0px;
 }
 
+/*тоже является антипатерном, но более чем распространённым, тут уже как в проекте повезёт,*/
+/*лично у нас это под запретом, потому что имеет такой же мизерный эффект как и сбросы выше*/
 *,
 *:before,
 *:after {
@@ -52,6 +58,12 @@
   box-sizing: border-box;
 }
 
+/*не, это совсем плохо, даже если фокусировка выглядит паршиво,*/
+/*она даёт взаимодействие с сайтом, делает его доступнее
+здесь врядли можно легко переубедить, но стоит посмотреть на Вадима Макеева
+причем можно смотреть что душе угодно, у него всё про доступность и почему это важно
+https://www.youtube.com/c/pepelsbey
+*/
 :focus,
 :active {
   outline: none;
@@ -62,6 +74,7 @@ a:active {
   outline: none;
 }
 
+/*это уже устарело, нет необходимости, браузеры уже ок с этим если писать <!doctype html>*/
 nav,
 footer,
 header,
@@ -70,6 +83,7 @@ section {
   display: block;
 }
 
+/*это всё лишнее, разве body можно дать min-height: 100vh*/
 html,
 body {
   height: 100%;
@@ -82,6 +96,7 @@ body {
   font-size: 100%;
   line-height: 1;
   font-family: "Montserrat";
+  /*есть плагин такой autoprefixer, он обычно является частью сборки, сейчас это не пишут руками*/
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -94,6 +109,7 @@ body.lock {
 input,
 button,
 textarea {
+  /*чуть-чуть лучше писать font-family: inherit, каскадом возьмётся тот же шрифт что и на body*/
   font-family: "Montserrat";
 }
 
@@ -101,6 +117,8 @@ input::-ms-clear {
   display: none;
 }
 
+/*так не делают, насколько помню, у кнопок не курсор*/
+/*и далее до .wrapper не проверяю, все эти сбросы уже можно взять из normalize.css*/
 button {
   cursor: pointer;
 }
@@ -142,6 +160,9 @@ body {
   font-size: 16px;
 }
 
+/**
+  здесь всё лишнее, кроме background и min-height
+ */
 .wrapper {
   width: 100%;
   min-height: 100%;
@@ -172,6 +193,11 @@ body {
   position: relative;
 }
 
+/**
+  так, пожалуй это стоит отдельно обсудить,
+  для webp уже всё это не надо, его можно просто в picture использовать без дополнительных махинаций
+  с поддержкой тега img
+ */
 .ibg img {
   width: 0;
   height: 0;
@@ -187,6 +213,9 @@ body {
   padding-bottom: 15px;
 }
 
+/**
+  это не элемент, а отдельный блок .photo
+ */
 .profile__photo {
   -webkit-box-flex: 0;
       -ms-flex: 0 1 33.333%;
@@ -195,6 +224,9 @@ body {
   border-radius: 20px;
 }
 
+/**
+  Это всё лишнее судя по раскладке, можно просто написать здесь же margin: auto и остальное удалить, попробуй
+ */
 .profile__info {
   -webkit-box-flex: 0;
       -ms-flex: 0 1 66.667%;
@@ -210,6 +242,7 @@ body {
           justify-content: center;
 }
 
+/*лишняя вложенность, можно было и для profile__info сделать*/
 .profile__name {
   font-size: 30px;
   font-weight: 600;
@@ -220,6 +253,22 @@ body {
   background-color: #254E58;
 }
 
+/**
+  вёрстку всего блока .contacts можно было сделать меньшим кол-вом кода
+  по сути это
+  .contacts {
+    display: flex;
+    align-items: center;
+    min-height: 100px;
+    background-color: #254E58;
+  }
+
+  .contacts__item {
+    flex: 1 1 auto;
+  }
+
+  причем дополнительные теги типа .contacts__items, contacts__container - лишние
+ */
 .contacts__items {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -254,15 +303,23 @@ body {
 
 .contacts__item::before {
   font-size: 22px;
+  /*0px -> можно просто 0, ещё здесь можно просто margin-right: 10px*/
   margin: 0px 10px 0px 0px;
+  /*стоит вынести в css-variables var(--primary-color)*/
   color: #88BDBC;
   -webkit-transition: all 0.8s ease 0s;
   -o-transition: all 0.8s ease 0s;
+  /*вижу цвет изменяется при hover, делать all лишнее*/
   transition: all 0.8s ease 0s;
 }
 
 .contacts__text {
   font-size: 18px;
+  /**
+    можно было сделать иконку внутри ссылки, это было бы логичнее, она была бы кликабельна,
+    и не делать дополнительный div.contacts__item, сразу .contacts__link со всеми стилями
+    тогда и transition можно было бы дать только ссылке, иконка внутри наследовала бы стили от неё
+   */
   color: #88BDBC;
   -webkit-transition: all 0.8s ease 0s;
   -o-transition: all 0.8s ease 0s;
@@ -286,6 +343,11 @@ body {
           flex: 0 1 60%;
 }
 
+/**
+  ещё лучше через гриды делать .info-block {display: grid; gap: 30px},
+  все дочерние элементы между собой получат этот отступ
+  альтернативная запись твоей будет .info-block__item + .info-block__item {margin-top: 30px}, хотя с гридами идея чище, новее
+ */
 .info-block__item:not(:last-child) {
   margin-bottom: 30px;
 }
@@ -297,6 +359,7 @@ body {
 }
 
 .info-block__info {
+  /*ого, что-то очень страшное, лучше проще line-height 1.15 бахнуть, не понял этого сатанизма*/
   line-height: 114.2857142857%;
 }
 
@@ -304,6 +367,7 @@ body {
   margin-bottom: 15px;
 }
 
+/*плохое имя класса, описал в html*/
 .info-block__bold {
   font-weight: 600;
   display: inline-block;
@@ -317,6 +381,9 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  /**
+  так, тут точно есть какой-то смысл в этом магическом числе (нет?)
+   */
   line-height: 114.2857142857%;
 }
 
@@ -351,6 +418,11 @@ body {
     display: flex;
   }
 }
+
+/*а вот .contacts__container выглядит плохо для мелких экранов
+и такого бы не произошло если придерживаться mobile first вёрстки
+https://ru.stackoverflow.com/questions/651734/%D0%A0%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-mobile-first
+*/
 
 @media (min-width: 650px) {
   .information__container {
@@ -391,6 +463,15 @@ body {
   }
 }
 
+/*не, это что-то совсем плохое пошло, я не понимаю что именно решается для малых экранов
+сопроводительный комментарий не помешал бы
+плюс обрати внимание что у тебя здесь дублирование очень сильное, явно означает что
+можно создать отдельный класс и в html навесить так где он нужен
+работа по отступам скорее так не должна вестить, это решается комплексно, скажем
+для мобилок был один отступ 16px, а для десктопов стал 24px
+и если дизайнер что-то другое рандомное нарисовал - оч жаль,
+можно смело идти спорить в адекватности применимых величин
+*/
 @media (max-width: 1150px) {
   .contacts__items {
     padding-top: calc(20px + 20 * ((100vw - 320px) / 830));
@@ -440,6 +521,7 @@ body {
   }
 }
 
+/*оно точно из этого проекта?*/
 @media (max-width: 767.98px) {
   body.lock {
     width: 100%;
@@ -503,6 +585,7 @@ body {
   }
 }
 
+/*интересное решение, имеет место быть, но лучше бы его поближе к самим блокам кода иметь*/
 @media (any-hover: hover) {
   .contacts__item:hover .contacts__text {
     color: #fff;
