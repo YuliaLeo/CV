@@ -3,11 +3,12 @@
 
 <head>
 	<title>Ефремова Юлия Александровна</title>
-
-<!--	достаточно простого <meta charset="UTF-8">-->
-	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	<!--достаточно простого <meta charset="UTF-8">-->
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="css/style.min.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
@@ -16,94 +17,96 @@
 		<main class="page">
 			<section class="profile">
 				<div class="profile__container container">
-<!--					что такое ibg?-->
-					<div class="profile__photo ibg">
+					<!--что такое ibg?-->
+					<!-- *ibg это image background, класс, по которому в javascript я устанавливаю картинку 
+						как фон элемента (просто так потом её легче адаптировать), сразу в background-image в css я ее не ставлю, так
+						как через html пользователю менять её было бы намного удобнее
+					-->
+					<div class="profile__photo ibg photo">
 						<picture>
-<!--							желательно не компоновать теги на одной строке, сама идея с picture отличная-->
-							<source srcset="img/photo.webp" type="image/webp"><img src="img/photo.jpg" alt="Фото">
+							<!--желательно не компоновать теги на одной строке, сама идея с picture отличная-->
+							<source srcset="img/photo.webp" type="image/webp">
+							<img src="img/photo.jpg" alt="Фото">
 						</picture>
 					</div>
-					<div class="profile__info">
-						<h1 class="profile__name">Ефремова Юлия Александровна</h1>
-					</div>
+					<h1 class="profile__info">Ефремова Юлия Александровна</h1>
 				</div>
 			</section>
 
-			<section class="contacts">
-				<div class="contacts__container container">
-					<div class="contacts__items">
-						<div class="contacts__item _icon-location">
-							<div class="contacts__text ">г. Томск</div>
-						</div>
-						<div class="contacts__item _icon-envelop">
-							<a href="mailto:efremova.julia.02.08.2003@gmail.com"
-								class="contacts__text ">efremova.julia.02.08.2003@gmail.com</a>
-						</div>
-						<div class="contacts__item _icon-github">
-							<a href="https://github.com/YuliaLeo" class="contacts__text"
-								target="_blank">https://github.com/YuliaLeo</a>
-						</div>
-					</div>
+			<section class="contacts container">
+				<div class="contacts__link _icon-location">
+					г. Томск
 				</div>
+				<a href="mailto:efremova.julia.02.08.2003@gmail.com" class="contacts__link _icon-envelop">
+					efremova.julia.02.08.2003@gmail.com
+				</a>
+				<a href="https://github.com/YuliaLeo" class="contacts__link _icon-github" target="_blank">
+					https://github.com/YuliaLeo
+				</a>
 			</section>
 
 			<section class="information">
 				<div class="information__container container">
 					<div class="information__education info-block">
-						<div class="info-block__item">
-<!--							судя по всему это h2 как и прочие h3-->
-							<h3 class="info-block__title">Образование:</h3>
-
-<!--							по хорошему это dl dt dd-->
+						<h2 class="info-block__title">Образование</h2>
+						<dl class="info-block__item">
+							<!--судя по всему это h2 как и прочие h3-->
+							<!--по хорошему это dl dt dd-->
 							<div class="info-block__info">
-<!--								__bold - плохое имя класса, так же плохо как например __red, если бы захотелось покрасить красным,-->
-<!--								 судя по всему это __term | __heading | __definition, а через css уже font-weight можно-->
-								<span class="info-block__bold">ВУЗ:</span> Томский государственный университет
+								<!--__bold - плохое имя класса, так же плохо как например __red, если бы захотелось покрасить красным,-->
+								<!--судя по всему это __term | __heading | __definition, а через css уже font-weight можно-->
+								<dt class="info-block__heading">ВУЗ:</dt>
+								<dd>Томский государственный университет</dd>
 							</div>
 							<div class="info-block__info">
-								<span class="info-block__bold">Факультет:</span> Институт прикладной математики и
-								компьютерных наук
+								<dt class="info-block__heading">Факультет:</dt>
+								<dd>Институт прикладной математики и
+									компьютерных наук</dd>
 							</div>
 							<div class="info-block__info">
-								<span class="info-block__bold">Курс:</span> 2
+								<dt class="info-block__heading">Курс:</dt>
+								<dd>2</dd>
 							</div>
-						</div>
-						<div class="info-block__item">
-<!--							не является ошибкой, но стилистически двоеточие лишнее после заголовков-->
-							<h3 class="info-block__title">Иностранные языки:</h3>
+						</dl>
+						<!--не является ошибкой, но стилистически двоеточие лишнее после заголовков-->
+						<h2 class="info-block__title">Иностранные языки</h2>
+						<dl class="info-block__item">
 							<div class="info-block__info">
-								<span class="info-block__bold">Английский язык: </span>B2
+								<dt class="info-block__heading">Английский язык: </dt>
+								<dd>B2</dd>
 							</div>
 							<div class="info-block__info">
-								<span class="info-block__bold">Испанский язык :</span>B2-C1
+								<dt class="info-block__heading">Испанский язык :</dt>
+								<dd>B2-C1</dd>
 							</div>
-						</div>
+						</dl>
 					</div>
 					<div class="information__goals info-block">
+						<h2 class="info-block__title">Опыт в программировании:</h2>
+						<dl class="info-block__item">
+							<div class="info-block__info">
+								<dt class="info-block__heading">Университет :</dt>
+								<dd>Изучение языка программирования C++ в
+									течении 2 семестра 1 курса.</dd>
+							</div>
+							<div class="info-block__info">
+								<!-- здесь и в подобных местах двоеточие пишется слитно со словом, но это мелочи,
+									потому что особо по html не вижу проблем придираюсь к незначительному-->
+								<dt class="info-block__heading">Курсы:</dt>
+								<dd>Изучение языка программирования C++ на курсах
+									довузовской подготовки.</dd>
+							</div>
+							<div class="info-block__info">
+								<dt class="info-block__heading">Самообучение:</dt>
+								<dd> Изучение языка программирования
+									Javascript, языка гипертекстовой разметки HTML и языка каскадных таблиц стилей CSS
+									по курсам на YouTube, а также практика полученных знаний: верстка 5 макетов из Figma и
+									Photoshop,
+									которые размещены на странице Github. Изучение платформы Wordpress.</dd>
+							</div>
+						</dl>
+						<h2 class="info-block__title">Цели посещения курсов:</h2>
 						<div class="info-block__item">
-							<h3 class="info-block__title">Опыт в программировании:</h3>
-							<div class="info-block__info">
-								<span class="info-block__bold">Университет :</span> Изучение языка программирования C++ в
-								течении 2 семестра 1 курса.
-							</div>
-							<div class="info-block__info">
-<!--
-здесь и в подобных местах двоеточие пишется слитно со словом, но это мелочи,
-потому что особо по html не вижу проблем
-придираюсь к незначительному-->
-								<span class="info-block__bold">Курсы :</span> Изучение языка программирования C++ на курсах
-								довузовской подготовки.
-							</div>
-							<div class="info-block__info">
-								<span class="info-block__bold">Самообучение :</span> Изучение языка программирования
-								Javascript, языка гипертекстовой разметки HTML и языка каскадных таблиц стилей CSS
-								по курсам на YouTube, а также практика полученных знаний: верстка 5 макетов из Figma и
-								Photoshop,
-								которые размещены на странице Github. Изучение платформы Wordpress.
-							</div>
-						</div>
-						<div class="info-block__item">
-							<h3 class="info-block__title">Цели посещения курсов:</h3>
 							<ul class="info-block__list">
 								<li class="info-block__list-item">Обобщить, систематизировать, укрепить и улучшить уже имеющиеся
 									знания
@@ -118,7 +121,7 @@
 							</ul>
 						</div>
 						<div class="info-block__item">
-							<h3 class="info-block__title">Откуда узнала про курс?</h3>
+							<h2 class="info-block__title">Откуда узнала про курс?</h2>
 							<!--
 							проще к чтению и рефакторингу следующее форматирование
 
@@ -138,8 +141,14 @@
 							например не писать атрибуты на отдельных строках,
 							зависит от проекта, но общая идея в том что код выше проще читать и редактировать
 							-->
-							<div class="info-block__info">Из группы <a href="https://vk.com/kingsoftsu"
-									class="info-block__link" target="_blank">ИПМКН</a> ВКонтакте</div>
+							<!--*Поняла, просто редактор кода при сохранении у меня форматирует код и атрибуты пишет в одну строку-->
+							<div class="info-block__info">
+								Из группы
+								<a href="https://vk.com/kingsoftsu" class="info-block__link" target="_blank">
+									ИПМКН
+								</a>
+								ВКонтакте
+							</div>
 						</div>
 					</div>
 				</div>
@@ -148,7 +157,7 @@
 
 	</div>
 
-	<script src="js/script.min.js"></script>
+	<script src="js/script.js"></script>
 </body>
 
 </html>

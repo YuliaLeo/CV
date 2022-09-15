@@ -1,9 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 /*импортам шрифтов с гугла место в html, это блокирует загрузку*/
 /*https://stackoverflow.com/questions/12316501/including-google-fonts-link-or-import*/
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
 
 /*идею понял, можно лучше через font-awesome или через icomoon, если дизайнер нарисовал свои иконки*/
+/**Поняла*/
 @font-face {
   font-family: "icons";
   font-display: swap;
@@ -43,20 +42,9 @@
 
 /*это плохая идея, минимальное кол-во профита от всеобщего сброса по всем тегам,*/
 /*лучше использовать normalize.css и далее задавать сбросы уже отдельным элементам*/
-* {
-  padding: 0px;
-  margin: 0px;
-  border: 0px;
-}
-
 /*тоже является антипатерном, но более чем распространённым, тут уже как в проекте повезёт,*/
 /*лично у нас это под запретом, потому что имеет такой же мизерный эффект как и сбросы выше*/
-*,
-*:before,
-*:after {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
+/**Поняла, добавила стили отдельно элементам body, h1, h2, ul, dd, dl*/
 
 /*не, это совсем плохо, даже если фокусировка выглядит паршиво,*/
 /*она даёт взаимодействие с сайтом, делает его доступнее
@@ -64,53 +52,31 @@
 причем можно смотреть что душе угодно, у него всё про доступность и почему это важно
 https://www.youtube.com/c/pepelsbey
 */
-:focus,
-:active {
-  outline: none;
-}
-
-a:focus,
-a:active {
-  outline: none;
-}
+/**Поняла, посмотрю, просто мне кажется, что лучше задавать не outline, а border потом отдельно каждому элементу для взаимодействия*/
 
 /*это уже устарело, нет необходимости, браузеры уже ок с этим если писать <!doctype html>*/
-nav,
-footer,
-header,
-aside,
-section {
-  display: block;
-}
 
-/*это всё лишнее, разве body можно дать min-height: 100vh*/
-html,
-body {
-  height: 100%;
-  width: 100%;
-  min-width: 320px;
-  position: relative;
-}
+/*?это всё лишнее, разве body можно дать min-height: 100vh*/
 
 body {
+	color: #112D32;
+	font-size: 16px;
+	margin: 0;
   font-size: 100%;
   line-height: 1;
   font-family: "Montserrat";
   /*есть плагин такой autoprefixer, он обычно является частью сборки, сейчас это не пишут руками*/
+  /**Я пользуюсь сборщиком gulp и autoprefixer у меня там и установлен*/
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-}
-
-body.lock {
-  overflow: hidden;
 }
 
 input,
 button,
 textarea {
   /*чуть-чуть лучше писать font-family: inherit, каскадом возьмётся тот же шрифт что и на body*/
-  font-family: "Montserrat";
+  font-family: inherit;
 }
 
 input::-ms-clear {
@@ -118,10 +84,11 @@ input::-ms-clear {
 }
 
 /*так не делают, насколько помню, у кнопок не курсор*/
+/**Хорошо, просто мне казалось, что так с ними удобнее работать*/
+
 /*и далее до .wrapper не проверяю, все эти сбросы уже можно взять из normalize.css*/
-button {
-  cursor: pointer;
-}
+/**Насколько я понимаю normalize.css это вот этот файл 
+https://github.com/necolas/normalize.css/blob/master/normalize.css ?*/
 
 button::-moz-focus-inner {
   padding: 0;
@@ -153,36 +120,34 @@ h5,
 h6 {
   font-size: inherit;
   font-weight: inherit;
+  margin: 0;
 }
 
-body {
-  color: #112D32;
-  font-size: 16px;
+dl, dd {
+	margin: 0;
 }
 
-/**
-  здесь всё лишнее, кроме background и min-height
- */
+ul {
+	padding: 0;
+	margin: 0;
+}
+
+:root {
+	--primary-color: #88BDBC;
+}
+
+/*здесь всё лишнее, кроме background и min-height*/
 .wrapper {
-  width: 100%;
   min-height: 100%;
-  overflow: hidden;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   background: -o-linear-gradient(45deg, #112D32, #4F4A41);
   background: linear-gradient(45deg, #112D32, #4F4A41);
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1170px;
   margin: 0px auto;
   width: 100%;
-  background-color: #88BDBC;
+  background-color: var(--primary-color);
   padding: 0 15px;
 }
 
@@ -193,11 +158,12 @@ body {
   position: relative;
 }
 
-/**
+/*
   так, пожалуй это стоит отдельно обсудить,
   для webp уже всё это не надо, его можно просто в picture использовать без дополнительных махинаций
   с поддержкой тега img
  */
+ /**Тут я просто скрываю картинку из html, так как она устанавливается через background-image в javascript*/
 .ibg img {
   width: 0;
   height: 0;
@@ -213,10 +179,8 @@ body {
   padding-bottom: 15px;
 }
 
-/**
-  это не элемент, а отдельный блок .photo
- */
-.profile__photo {
+/*это не элемент, а отдельный блок .photo*/
+.photo {
   -webkit-box-flex: 0;
       -ms-flex: 0 1 33.333%;
           flex: 0 1 33.333%;
@@ -224,36 +188,20 @@ body {
   border-radius: 20px;
 }
 
-/**
-  Это всё лишнее судя по раскладке, можно просто написать здесь же margin: auto и остальное удалить, попробуй
- */
+/*Это всё лишнее судя по раскладке, можно просто написать здесь же margin: auto и остальное удалить, попробуй*/
+/**Да, точно*/
 .profile__info {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 1 66.667%;
-          flex: 0 1 66.667%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-/*лишняя вложенность, можно было и для profile__info сделать*/
-.profile__name {
-  font-size: 30px;
-  font-weight: 600;
-  text-align: center;
+	margin: auto;
+	font-size: 30px;
+	font-weight: 600;
+	text-align: center;
 }
 
 .contacts__container {
   background-color: #254E58;
 }
 
-/**
+/*
   вёрстку всего блока .contacts можно было сделать меньшим кол-вом кода
   по сути это
   .contacts {
@@ -269,61 +217,38 @@ body {
 
   причем дополнительные теги типа .contacts__items, contacts__container - лишние
  */
-.contacts__items {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin: 0px -15px;
-  padding-top: 40px;
-}
 
-.contacts__item {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding-right: 15px;
-  padding-left: 15px;
-  padding-bottom: 40px;
-}
+ .contacts {
+	display: flex;
+	align-items: center;
+	min-height: 100px;
+	background-color: #254E58;
+ }
 
-.contacts__item::before {
-  font-size: 22px;
-  /*0px -> можно просто 0, ещё здесь можно просто margin-right: 10px*/
-  margin: 0px 10px 0px 0px;
-  /*стоит вынести в css-variables var(--primary-color)*/
-  color: #88BDBC;
-  -webkit-transition: all 0.8s ease 0s;
-  -o-transition: all 0.8s ease 0s;
-  /*вижу цвет изменяется при hover, делать all лишнее*/
-  transition: all 0.8s ease 0s;
-}
-
-.contacts__text {
-  font-size: 18px;
-  /**
+  /*
     можно было сделать иконку внутри ссылки, это было бы логичнее, она была бы кликабельна,
     и не делать дополнительный div.contacts__item, сразу .contacts__link со всеми стилями
     тогда и transition можно было бы дать только ссылке, иконка внутри наследовала бы стили от неё
    */
-  color: #88BDBC;
-  -webkit-transition: all 0.8s ease 0s;
-  -o-transition: all 0.8s ease 0s;
-  transition: all 0.8s ease 0s;
+
+ .contacts__link {
+	padding: 20px;
+	flex: 1 1 auto;
+	display: flex;
+	justify-content: center;
+	font-size: 18px;
+	 /*стоит вынести в css-variables var(--primary-color)*/
+	color: var(--primary-color);
+	-webkit-transition: color 0.8s ease 0s;
+	-o-transition: color 0.8s ease 0s;
+	/*вижу цвет изменяется при hover, делать all лишнее*/
+	transition: color 0.8s ease 0s;
+ }
+
+.contacts__link::before {
+  font-size: 22px;
+  /*0px -> можно просто 0, ещё здесь можно просто margin-right: 10px*/
+  margin-right: 10px;
 }
 
 .information__container {
@@ -343,11 +268,12 @@ body {
           flex: 0 1 60%;
 }
 
-/**
-  ещё лучше через гриды делать .info-block {display: grid; gap: 30px},
+/*
+ ! ещё лучше через гриды делать .info-block {display: grid; gap: 30px},
   все дочерние элементы между собой получат этот отступ
   альтернативная запись твоей будет .info-block__item + .info-block__item {margin-top: 30px}, хотя с гридами идея чище, новее
  */
+ 
 .info-block__item:not(:last-child) {
   margin-bottom: 30px;
 }
@@ -360,7 +286,12 @@ body {
 
 .info-block__info {
   /*ого, что-то очень страшное, лучше проще line-height 1.15 бахнуть, не понял этого сатанизма*/
+  /** Я просто использую препроцессор sass и задавала формулу line-height: 16 / 14 * 100%;, поэтому получилось такое ужасное число*/
   line-height: 114.2857142857%;
+}
+
+.info-block__info dd {
+	display: inline;
 }
 
 .info-block__info:not(:last-child) {
@@ -368,9 +299,10 @@ body {
 }
 
 /*плохое имя класса, описал в html*/
-.info-block__bold {
+/**Исправила*/
+.info-block__heading {
   font-weight: 600;
-  display: inline-block;
+  display: inline;
   margin: 0px 10px 0px 0px;
 }
 
@@ -381,9 +313,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  /**
-  так, тут точно есть какой-то смысл в этом магическом числе (нет?)
-   */
+  /* так, тут точно есть какой-то смысл в этом магическом числе (нет?)*/
   line-height: 114.2857142857%;
 }
 
@@ -419,7 +349,7 @@ body {
   }
 }
 
-/*а вот .contacts__container выглядит плохо для мелких экранов
+/*!а вот .contacts__container выглядит плохо для мелких экранов
 и такого бы не произошло если придерживаться mobile first вёрстки
 https://ru.stackoverflow.com/questions/651734/%D0%A0%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-mobile-first
 */
@@ -463,7 +393,7 @@ https://ru.stackoverflow.com/questions/651734/%D0%A0%D0%B5%D0%B0%D0%BB%D0%B8%D0%
   }
 }
 
-/*не, это что-то совсем плохое пошло, я не понимаю что именно решается для малых экранов
+/*!не, это что-то совсем плохое пошло, я не понимаю что именно решается для малых экранов
 сопроводительный комментарий не помешал бы
 плюс обрати внимание что у тебя здесь дублирование очень сильное, явно означает что
 можно создать отдельный класс и в html навесить так где он нужен
@@ -472,21 +402,33 @@ https://ru.stackoverflow.com/questions/651734/%D0%A0%D0%B5%D0%B0%D0%BB%D0%B8%D0%
 и если дизайнер что-то другое рандомное нарисовал - оч жаль,
 можно смело идти спорить в адекватности применимых величин
 */
+/** В scss у меня есть небольшой миксин, который динамически меняет размеры различных отступов и шрифтов в зависимости от ширины экрана
+@mixin adaptiv-value($property, $startSize, $minSize, $type) {
+	$addSize: $startSize - $minSize;
+	@if $type==1 {
+		#{$property}: $startSize + px;
+		@media (max-width: #{$maxWidthContainer + px}) {
+			#{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+		}
+	} @else if $type==2 {
+		#{$property}: $startSize + px;
+		@media (max-width: #{$maxWidth + px}) {
+			#{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+		}
+	} @else {
+		#{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+	}
+}
+*/
 @media (max-width: 1150px) {
-  .contacts__items {
-    padding-top: calc(20px + 20 * ((100vw - 320px) / 830));
-  }
-
-  .contacts__item {
-    padding-bottom: calc(20px + 20 * ((100vw - 320px) / 830));
-  }
-
-  .contacts__item::before {
-    font-size: calc(20px + 2 * ((100vw - 320px) / 830));
-  }
-
-  .contacts__text {
+  .contacts__link::before {
     font-size: calc(16px + 2 * ((100vw - 320px) / 830));
+  }
+
+  .contacts__link {
+    font-size: calc(14px + 2 * ((100vw - 320px) / 830));
+	 padding-top: calc(10px + 2 * ((100vw - 320px) / 830));
+	 padding-bottom: calc(10px + 2 * ((100vw - 320px) / 830));
   }
 
   .information__container {
@@ -515,19 +457,15 @@ https://ru.stackoverflow.com/questions/651734/%D0%A0%D0%B5%D0%B0%D0%BB%D0%B8%D0%
     max-width: 750px;
   }
 
-  .contacts__items {
+  .contacts {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
   }
 }
 
 /*оно точно из этого проекта?*/
+/**Да, забыла удалить этот кусок, просто у меня есть небольшой шаблон с частоиспользуемым кодом и я не увидела, что это лишнее*/
 @media (max-width: 767.98px) {
-  body.lock {
-    width: 100%;
-    position: fixed;
-  }
-
   .container {
     max-width: none;
     padding-left: 10px;
@@ -586,12 +524,9 @@ https://ru.stackoverflow.com/questions/651734/%D0%A0%D0%B5%D0%B0%D0%BB%D0%B8%D0%
 }
 
 /*интересное решение, имеет место быть, но лучше бы его поближе к самим блокам кода иметь*/
+/**Учту, просто у меня gulp все медиа-запросы в конец файла собирает*/
 @media (any-hover: hover) {
-  .contacts__item:hover .contacts__text {
-    color: #fff;
-  }
-
-  .contacts__item:hover::before {
+  .contacts__link:hover {
     color: #fff;
   }
 
