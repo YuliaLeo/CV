@@ -281,7 +281,6 @@ ul {
 .info-block__title {
   text-transform: uppercase;
   font-size: 20px;
-  margin-bottom: 25px;
 }
 
 .info-block__info {
@@ -436,14 +435,6 @@ https://ru.stackoverflow.com/questions/651734/%D0%A0%D0%B5%D0%B0%D0%BB%D0%B8%D0%
 
   .information__container {
     padding-top: calc(15px + 15 * ((100vw - 320px) / 830));
-  }
-
-  .info-block__item:not(:last-child) {
-    margin-bottom: calc(15px + 15 * ((100vw - 320px) / 830));
-  }
-
-  .info-block__title {
-    margin-bottom: calc(15px + 10 * ((100vw - 320px) / 830));
   }
 
   .info-block__info:not(:last-child) {
